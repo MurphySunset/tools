@@ -2,6 +2,7 @@
 let selectedImageFile = null;
 let selectedImageUrl = null;
 let totalCost = 0; // Variable pour suivre le coût total
+let originalImageDimensions = null; // Variable pour stocker les dimensions de l'image
 
 // Écouteurs d'événements
 document.addEventListener('DOMContentLoaded', function() {
@@ -18,6 +19,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('originalImagePreview').style.display = 'block';
                 selectedImageUrl = null; // Réinitialiser l'URL
                 document.getElementById('imageUrl').value = ''; // Réinitialiser le champ URL
+                
+                // Calculer les dimensions de l'image et afficher les informations de coût pour tous les modèles
+                const img = new Image();
+                img.onload = function() {
+                    const megapixels = (this.width * this.height) / 1000000;
+                    const benCost = parseFloat((megapixels * 0.0035).toFixed(4));
+                    const birefnetCost = parseFloat((megapixels * 0.427 * 0.00111).toFixed(4));
+                    const rembgCost = parseFloat((megapixels * 0.510 * 0.00111).toFixed(4));
+                    const briaCost = 0.018; // Coût fixe de BRIA
+                    
+                    // Créer un tableau des coûts pour trier et attribuer les symboles 💸
+                    const costs = [
+                        { model: 'ben', cost: benCost, elementId: 'ben-cost-info' },
+                        { model: 'birefnet', cost: birefnetCost, elementId: 'birefnet-cost-info' },
+                        { model: 'rembg', cost: rembgCost, elementId: 'rembg-cost-info' },
+                        { model: 'bria', cost: briaCost, elementId: 'bria-cost-info' } // Ajout de BRIA
+                    ];
+                    
+                    // Trier les coûts du moins cher au plus cher
+                    costs.sort((a, b) => a.cost - b.cost);
+                    
+                    // Attribuer les symboles 💸 en fonction du classement
+                    costs.forEach((item, index) => {
+                        let symbols = '';
+                        // Ajouter des symboles 💸 en fonction du classement (moins de 💸 = moins cher)
+                        for (let i = 0; i <= index; i++) {
+                            symbols += '💸';
+                        }
+                        
+                        document.getElementById(item.elementId).innerHTML = 
+                            `(~${megapixels.toFixed(2)} mégapixels, ~$${item.cost} est.) ${symbols}`;
+                    });
+                };
+                img.src = event.target.result;
             }
             reader.readAsDataURL(selectedImageFile);
         }
@@ -32,15 +67,70 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('originalImagePreview').style.display = 'block';
             document.getElementById('imageUpload').value = ''; // Réinitialiser le téléchargement
             selectedImageFile = null; // Réinitialiser le fichier
+            
+            // Calculer les dimensions de l'image et afficher les informations de coût pour tous les modèles
+            const img = new Image();
+            img.onload = function() {
+                const megapixels = (this.width * this.height) / 1000000;
+                const benCost = parseFloat((megapixels * 0.0035).toFixed(4));
+                const birefnetCost = parseFloat((megapixels * 0.427 * 0.00111).toFixed(4));
+                const rembgCost = parseFloat((megapixels * 0.510 * 0.00111).toFixed(4));
+                const briaCost = 0.018; // Coût fixe de BRIA
+                
+                // Créer un tableau des coûts pour trier et attribuer les symboles 💸
+                const costs = [
+                    { model: 'ben', cost: benCost, elementId: 'ben-cost-info' },
+                    { model: 'birefnet', cost: birefnetCost, elementId: 'birefnet-cost-info' },
+                    { model: 'rembg', cost: rembgCost, elementId: 'rembg-cost-info' },
+                    { model: 'bria', cost: briaCost, elementId: 'bria-cost-info' } // Ajout de BRIA
+                ];
+                
+                // Trier les coûts du moins cher au plus cher
+                costs.sort((a, b) => a.cost - b.cost);
+                
+                // Attribuer les symboles 💸 en fonction du classement
+                costs.forEach((item, index) => {
+                    let symbols = '';
+                    // Ajouter des symboles 💸 en fonction du classement (moins de 💸 = moins cher)
+                    for (let i = 0; i <= index; i++) {
+                        symbols += '💸';
+                    }
+                    
+                    document.getElementById(item.elementId).innerHTML = 
+                        `(~${megapixels.toFixed(2)} mégapixels, ~$${item.cost} est.) ${symbols}`;
+                });
+            };
+            img.src = selectedImageUrl;
         } else {
             document.getElementById('originalImagePreview').style.display = 'none';
             selectedImageUrl = null;
+            // Réinitialiser les informations de coût
+            document.getElementById('ben-cost-info').innerHTML = '(Coût par mégapixel)';
+            document.getElementById('birefnet-cost-info').innerHTML = '(0.00111$/seconde)';
+            document.getElementById('rembg-cost-info').innerHTML = '(0.00111$/seconde)';
+            document.getElementById('bria-cost-info').innerHTML = '(0.018$/génération)';
         }
     });
     
     // Gestion du bouton de traitement
     document.getElementById('processBtn').addEventListener('click', processImage);
 });
+
+// Fonction pour obtenir les dimensions d'une image
+function getImageDimensions(imageUrl) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = function() {
+            resolve({
+                width: this.width,
+                height: this.height,
+                megapixels: (this.width * this.height) / 1000000 // Calcul du nombre de mégapixels
+            });
+        };
+        img.onerror = reject;
+        img.src = imageUrl;
+    });
+}
 
 // Fonction pour convertir un fichier en Base64
 function fileToBase64(file) {
@@ -102,14 +192,20 @@ async function processImage() {
     
     try {
         let originalImageForProcessing;
+        let imagePreviewUrl;
         
         // Si c'est une URL, on l'utilise directement, sinon on encode le fichier en Base64
         if (selectedImageUrl) {
             originalImageForProcessing = selectedImageUrl;
+            imagePreviewUrl = selectedImageUrl;
         } else if (selectedImageFile) {
             // Convertir le fichier en Base64
             originalImageForProcessing = await fileToBase64(selectedImageFile);
+            imagePreviewUrl = URL.createObjectURL(selectedImageFile);
         }
+        
+        // Obtenir les dimensions de l'image pour les calculs de prix
+        originalImageDimensions = await getImageDimensions(imagePreviewUrl);
         
         // Réinitialiser le coût total
         totalCost = 0;
@@ -128,7 +224,7 @@ async function processImage() {
             if (result.status === 'fulfilled') {
                 successCount++;
                 // Afficher le résultat pour le modèle correspondant
-                displayResultForModel(selectedImageUrl || URL.createObjectURL(selectedImageFile), result.value.url, selectedModels[index], result.value.cost);
+                displayResultForModel(imagePreviewUrl, result.value.url, selectedModels[index], result.value.cost);
             } else {
                 console.error(`Erreur lors du traitement avec le modèle ${selectedModels[index]}:`, result.reason);
                 // Afficher l'erreur spécifique pour ce modèle
@@ -178,20 +274,37 @@ async function processWithModel(apiKey, imageUrl, model) {
             break;
         case 'birefnet':
             resultUrl = await processWithBirefnet(apiKey, imageUrl);
-            // Pour les modèles à la seconde, le coût dépend de la durée de traitement
-            cost = 0.00111; // estimation de base
+            // BiRefNet est facturé à $0.00111/seconde, basé sur nos tests : ~0.427 secondes/mégapixel
+            if (originalImageDimensions) {
+                const megapixels = originalImageDimensions.megapixels;
+                const estimatedTime = megapixels * 0.427; // secondes
+                cost = estimatedTime * 0.00111; // $0.00111 par seconde
+            } else {
+                cost = 0.01; // estimation par défaut
+            }
             totalCost += cost;
             break;
         case 'ben':
             resultUrl = await processWithBen(apiKey, imageUrl);
-            // Pour le moment, on ne connaît pas le coût exact de Ben V2
-            cost = 0; // à préciser plus tard
+            // Ben V2 est facturé par mégapixel - environ $0.0035 par mégapixel
+            if (originalImageDimensions) {
+                const megapixels = originalImageDimensions.megapixels;
+                cost = megapixels * 0.0035; // Prix par mégapixel pour Ben V2
+            } else {
+                cost = 0.01; // estimation par défaut
+            }
             totalCost += cost;
             break;
         case 'rembg':
             resultUrl = await processWithRembg(apiKey, imageUrl);
-            // Pour les modèles à la seconde, le coût dépend de la durée de traitement
-            cost = 0.00111; // estimation de base
+            // REMBG est facturé à $0.00111/seconde, basé sur nos tests : ~0.510 secondes/mégapixel
+            if (originalImageDimensions) {
+                const megapixels = originalImageDimensions.megapixels;
+                const estimatedTime = megapixels * 0.510; // secondes
+                cost = estimatedTime * 0.00111; // $0.00111 par seconde
+            } else {
+                cost = 0.01; // estimation par défaut
+            }
             totalCost += cost;
             break;
         default:
@@ -241,7 +354,7 @@ function displayResultForModel(originalUrl, resultUrl, model, cost) {
                     </div>
                 </div>
                 <div class="mt-3">
-                    <a class="btn btn-sm btn-success" href="${resultUrl}" download="resultat-${model}.png">Télécharger</a>
+                    <button class="btn btn-sm btn-success" onclick="downloadImage('${resultUrl}', 'resultat-${model}.png')">Télécharger</button>
                 </div>
             </div>
         </div>
@@ -296,6 +409,24 @@ function displayErrorForModel(model, error) {
     
     // Afficher le conteneur de résultats
     document.getElementById('resultContainer').style.display = 'block';
+}
+
+// Fonction pour télécharger une image
+function downloadImage(imageUrl, filename) {
+    // Créer une balise <a> temporaire
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = filename; // Nom du fichier à télécharger
+    
+    // Cacher la balise et l'ajouter au DOM
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    
+    // Simuler un clic sur le lien
+    link.click();
+    
+    // Retirer la balise du DOM
+    document.body.removeChild(link);
 }
 
 // Fonction pour obtenir le nom complet d'un modèle
