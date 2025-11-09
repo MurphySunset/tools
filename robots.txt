@@ -1,0 +1,6 @@
+# www.mourey.info
+
+User-agent: *
+Allow: /
+
+Sitemap: https://tools.mourey.info/sitemap.xml
