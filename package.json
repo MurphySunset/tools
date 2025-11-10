@@ -1,0 +1,18 @@
+{
+  "name": "tools-mourey",
+  "version": "1.0.0",
+  "description": "Collection d'outils pour le développement et l'analyse",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./global.css --minify",
+    "watch:css": "npx tailwindcss -i ./src/input.css -o ./global.css --watch",
+    "build": "npm run build:css"
+  },
+  "keywords": ["tools", "daisyui", "tailwind", "css"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "daisyui": "^5.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

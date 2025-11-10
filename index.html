@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="cupcake">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tools - Mourey</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
+        /* Styles personnalisés globaux */
         .tool-card {
             transition: transform 0.2s;
         }
@@ -18,55 +16,50 @@
         }
         .tool-icon {
             font-size: 2.5rem;
-            color: #0d6efd;
         }
     </style>
 </head>
 <body>
-    <div class="container py-5">
-        <header class="text-center mb-5">
-            <h1 class="display-4">Outils - <a href="https://tools.mourey.info">tools.mourey.info</a></h1>
-            <p class="lead">Une collection d'outils utiles pour le développement et l'analyse</p>
+    <div class="container mx-auto py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold">Outils - <a href="https://tools.mourey.info">tools.mourey.info</a></h1>
+            <p class="text-lg">Une collection d'outils utiles pour le développement et l'analyse</p>
         </header>
-        
-        <div class="row g-4">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Background Remover -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card tool-card h-100">
-                    <div class="card-body text-center">
-                        <div class="tool-icon mb-3">
-                            <i class="fas fa-eraser"></i>
-                        </div>
-                        <h5 class="card-title">Background Remover</h5>
-                        <p class="card-text">Suppression d'arrière-plan d'images avec différents modèles IA</p>
-                        <a href="background-remover/" class="btn btn-primary">Accéder à l'outil</a>
+            <div class="card tool-card bg-base-100 shadow-xl h-full">
+                <div class="card-body text-center">
+                    <div class="tool-icon mb-3 text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
                     </div>
+                    <h5 class="card-title text-xl font-semibold">Background Remover</h5>
+                    <p class="card-text">Suppression d'arrière-plan d'images avec différents modèles IA</p>
+                    <a href="tools/background-remover/" class="btn btn-primary mt-4">Accéder à l'outil</a>
                 </div>
             </div>
-            
+
             <!-- Ajouter d'autres outils ici -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card tool-card h-100 bg-light">
-                    <div class="card-body text-center">
-                        <div class="tool-icon mb-3 text-muted">
-                            <i class="fas fa-plus"></i>
-                        </div>
-                        <h5 class="card-title">Nouvel Outil</h5>
-                        <p class="card-text">En développement...</p>
-                        <a href="#" class="btn btn-outline-primary disabled">Bientôt disponible</a>
+            <div class="card tool-card bg-base-100 shadow-xl h-full">
+                <div class="card-body text-center">
+                    <div class="tool-icon mb-3 text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
                     </div>
+                    <h5 class="card-title text-xl font-semibold">Nouvel Outil</h5>
+                    <p class="card-text">En développement...</p>
+                    <a href="#" class="btn btn-outline btn-primary mt-4 disabled pointer-events-none">Bientôt disponible</a>
                 </div>
             </div>
         </div>
-        
-        <footer class="text-center mt-5 pt-4 border-top">
+
+        <footer class="text-center mt-12 pt-8 border-t">
             <p>© 2025 Mourey Tools. Tous droits réservés.</p>
             <p>Site hébergé sur GitHub Pages</p>
         </footer>
     </div>
-    
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
