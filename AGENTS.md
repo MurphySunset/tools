@@ -8,6 +8,10 @@
 
 Les outils disponibles dans ce projet se trouvent dans le répertoire `tools/`. Pour connaître les outils disponibles, il suffit de regarder les dossiers présents dans le répertoire `tools/`.
 
+Actuellement, le projet contient les outils suivants :
+- **Background Remover** (`tools/background-remover/`) : Outil de suppression d'arrière-plan d'images avec différents modèles IA
+- **Password Generator** (`tools/password-generator/`) : Générateur de mots de passe sécurisés avec différents formats (Base64, hexadécimal)
+
 ## Guidelines de style
 
 Le projet utilisera DaisyUI comme framework CSS à la place de Bootstrap pour tous les nouveaux développements. Veuillez vous référer au fichier [docs/daisyui.md](./docs/daisyui.md) pour les détails techniques sur l'utilisation de DaisyUI dans ce projet, y compris l'installation, l'utilisation des composants et les bonnes pratiques.
@@ -24,7 +28,7 @@ Le thème principal utilisé est 'cupcake'. Pour modifier les styles globaux ou 
 2. Générez le CSS avec la commande : `npm run build:css` (ou `npx tailwindcss -i ./src/input.css -o ./global.css --minify`)
 3. Le fichier `global.css` à la racine contiendra alors les nouveaux styles
 
-Pour qu'un outil utilise ces styles globaux, incluez simplement la balise `<link rel="stylesheet" href="global.css">` dans l'en-tête HTML.
+Pour qu'un outil utilise ces styles globaux, incluez simplement la balise `<link rel="stylesheet" href="../../global.css">` dans l'en-tête HTML (le chemin relatif dépend de la profondeur du dossier de l'outil dans le répertoire `tools/`).
 
 ## Ajout de nouveaux outils
 

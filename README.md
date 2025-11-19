@@ -8,6 +8,7 @@ Une collection d'outils utiles pour le développement et l'analyse, hébergée s
 
 - `/` - Page d'accueil listant tous les outils
 - `/background-remover/` - Outil de suppression d'arrière-plan d'images
+- `/password-generator/` - Générateur de mots de passe sécurisés
 
 ## Outils disponibles
 
@@ -19,6 +20,13 @@ Outil permettant de supprimer l'arrière-plan d'images en utilisant différents 
 - REMBG
 
 L'outil permet de tester plusieurs modèles simultanément et de comparer les résultats.
+
+### Password Generator
+Générateur de mots de passe sécurisés avec différents formats :
+- Base64
+- Hexadécimal
+
+L'outil utilise l'API Web Cryptography pour une génération sécurisée directement dans le navigateur.
 
 ## Déploiement
 
