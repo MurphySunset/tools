@@ -1,0 +1,16 @@
+{
+  "tools": [
+    {
+      "id": "background-remover",
+      "name": "Background Remover",
+      "description": "Outil de suppression d'arrière-plan d'images avec différents modèles IA",
+      "icon": "scissors"
+    },
+    {
+      "id": "password-generator",
+      "name": "Générateur de Mots de Passe",
+      "description": "Générateur de mots de passe sécurisés avec différents formats",
+      "icon": "key"
+    }
+  ]
+}

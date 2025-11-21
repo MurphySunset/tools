@@ -2,13 +2,52 @@
 
 Site web : https://tools.mourey.info
 
-Une collection d'outils utiles pour le développement et l'analyse, hébergée sur GitHub Pages.
+"Tools - Mourey" est une collection d'outils utiles pour le développement et l'analyse, hébergée sur GitHub Pages. Le projet vise à fournir une variété d'outils web accessibles facilement via une interface unifiée.
 
 ## Structure du projet
 
-- `/` - Page d'accueil listant tous les outils
-- `/background-remover/` - Outil de suppression d'arrière-plan d'images
-- `/password-generator/` - Générateur de mots de passe sécurisés
+- `index.html` : Page d'accueil qui liste tous les outils disponibles
+- `global.css` : Fichier CSS global généré par Tailwind CSS et DaisyUI
+- `src/input.css` : Fichier source CSS avec la configuration DaisyUI
+- `tools/` : Dossier contenant tous les outils individuels
+- `tools/template/` : Modèle standard pour créer de nouveaux outils
+- `scripts/` : Scripts utilitaires pour la gestion du projet
+- `docs/` : Documentation complémentaire
+
+## Technologies utilisées
+
+- HTML5, CSS3
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitaire
+- [DaisyUI](https://daisyui.com/) - Composants UI pour Tailwind CSS
+- JavaScript (côté client)
+- Node.js (pour les scripts de build)
+
+## Installation et développement
+
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/votre-compte/tools.baptiste.mourey.info.git
+   ```
+
+2. Installez les dépendances :
+   ```bash
+   npm install
+   ```
+
+3. Générez le CSS :
+   ```bash
+   npm run build:css
+   ```
+
+4. Générez la page d'accueil avec la liste des outils :
+   ```bash
+   npm run generate:index
+   ```
+
+5. Pour exécuter l'ensemble du build (CSS + génération de l'index) :
+   ```bash
+   npm run build
+   ```
 
 ## Outils disponibles
 
@@ -27,6 +66,27 @@ Générateur de mots de passe sécurisés avec différents formats :
 - Hexadécimal
 
 L'outil utilise l'API Web Cryptography pour une génération sécurisée directement dans le navigateur.
+
+## Ajouter un nouvel outil
+
+1. Copiez le dossier `tools/template/` et renommez-le avec le nom de votre nouvel outil
+2. Modifiez le contenu du nouveau dossier selon les besoins de votre outil
+3. Exécutez `npm run generate:index` pour que votre outil apparaisse sur la page d'accueil
+4. Vous pouvez également ajouter une description dans un fichier `README.md` à la racine de votre dossier d'outil
+
+## Scripts disponibles
+
+- `npm run build:css` : Génère le fichier CSS global à partir de src/input.css
+- `npm run watch:css` : Lance un watcher pour générer automatiquement le CSS
+- `npm run generate:index` : Génère automatiquement la liste des outils dans index.html
+- `npm run build` : Exécute le build complet (CSS + génération de l'index)
+
+## Tests
+
+Pour exécuter les tests de vérification du système :
+```bash
+node scripts/test-system.js
+```
 
 ## Déploiement
 
@@ -48,4 +108,4 @@ Pour tester localement :
 
 ## Licence
 
-Ce projet est open-source et disponible sous la licence MIT.
+Ce projet est open-source et disponible sous la licence GPL v3 (ou toute version ultérieure). Les dérivés doivent également être distribués sous la même licence.

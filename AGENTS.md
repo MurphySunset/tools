@@ -20,11 +20,10 @@ Le projet utilisera DaisyUI comme framework CSS à la place de Bootstrap pour to
 
 Le CSS global du projet est géré via un processus de build Tailwind CSS. Les fichiers de configuration se trouvent dans :
 - `src/input.css` : fichier source CSS avec la configuration DaisyUI
-- `tailwind.config.js` : fichier de configuration pour Tailwind CSS et DaisyUI
 - `global.css` : fichier CSS généré à la racine du projet
 
 Le thème principal utilisé est 'cupcake'. Pour modifier les styles globaux ou le thème :
-1. Modifiez le fichier `src/input.css` et/ou `tailwind.config.js`
+1. Modifiez le fichier `src/input.css`
 2. Générez le CSS avec la commande : `npm run build:css` (ou `npx tailwindcss -i ./src/input.css -o ./global.css --minify`)
 3. Le fichier `global.css` à la racine contiendra alors les nouveaux styles
 
@@ -33,9 +32,42 @@ Pour qu'un outil utilise ces styles globaux, incluez simplement la balise `<link
 ## Ajout de nouveaux outils
 
 Pour ajouter un nouvel outil au projet :
-1. Créez un nouveau dossier dans le répertoire `tools/` avec un nom descriptif
+1. Copiez le modèle dans `tools/template/` et renommez-le avec un nom descriptif
 2. Implémentez votre outil en utilisant DaisyUI pour le style
 3. Assurez-vous que votre outil inclut le fichier global CSS avec `<link rel="stylesheet" href="../global.css">`
 4. Assurez-vous que votre outil est accessible via une page HTML à la racine de votre dossier
-5. Mettez à jour la page d'accueil (index.html) pour inclure un lien vers votre nouvel outil
+5. Exécutez `npm run generate:index` pour que votre outil apparaisse automatiquement sur la page d'accueil
 6. Assurez-vous que votre outil suit les guidelines de style établies
+
+## Système de gestion automatisé
+
+Le projet inclut un système de gestion automatisé qui :
+- Génère dynamiquement la liste des outils sur la page d'accueil
+- Utilise des templates standardisés pour une cohérence entre les outils
+- Fournit des scripts de build pour automatiser les tâches répétitives
+
+Pour exécuter le build complet (CSS + génération de l'index) :
+```
+npm run build
+```
+
+Pour générer uniquement la page d'accueil avec la liste des outils :
+```
+npm run generate:index
+```
+
+## Tests
+
+Le projet inclut un script de test pour vérifier le bon fonctionnement du système :
+```
+node scripts/test-system.js
+```
+
+Ce script vérifie que :
+- Le script de génération d'index existe et fonctionne
+- Le template d'outil standardisé existe
+- Le fichier de configuration tools.json existe
+- Les marqueurs sont présents dans index.html
+- La génération de l'index met à jour correctement la page d'accueil
+- Les outils existants sont bien présents dans la page d'accueil
+- Les scripts dans package.json sont correctement configurés

@@ -4,15 +4,25 @@
   "description": "Collection d'outils pour le développement et l'analyse",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./global.css --minify",
+    "build:css": "node ./scripts/build-css.js",
     "watch:css": "npx tailwindcss -i ./src/input.css -o ./global.css --watch",
-    "build": "npm run build:css"
+    "generate:index": "node ./scripts/tool-list-generator.js",
+    "build": "npm run build:css && npm run generate:index"
   },
-  "keywords": ["tools", "daisyui", "tailwind", "css"],
+  "keywords": [
+    "tools",
+    "daisyui",
+    "tailwind",
+    "css"
+  ],
   "author": "",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "daisyui": "^5.0.0",
     "tailwindcss": "^4.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "postcss": "^8.5.6"
   }
 }
