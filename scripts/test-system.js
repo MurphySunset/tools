@@ -64,9 +64,9 @@ try {
 // Test 7: Vérifier que le fichier index.html a été mis à jour avec les outils
 console.log('\n--- Test 7: Vérification de la mise à jour de index.html ---');
 const updatedIndexContent = fs.readFileSync(indexPath, 'utf8');
-// Vérifier que le contenu généré contient des cartes d'outils
-const hasToolCards = updatedIndexContent.includes('card tool-card');
-assert(hasToolCards, 'Le fichier index.html a été mis à jour avec des cartes d\'outils');
+// Vérifier que le contenu généré contient des éléments d'outils
+const hasToolItems = updatedIndexContent.includes('tool-item');
+assert(hasToolItems, 'Le fichier index.html a été mis à jour avec des éléments d\'outils');
 
 // Test 8: Vérifier qu'un outil spécifique est présent dans index.html
 console.log('\n--- Test 8: Vérification de la présence d\'un outil spécifique ---');
