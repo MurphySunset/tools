@@ -1,108 +1,100 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="cupcake">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de Mots de Passe - Mourey Tools</title>
     <meta name="description" content="Générateur de mots de passe sécurisés avec différents formats">
     <link rel="stylesheet" href="../../global.css">
-    <style>
-        .password-result {
-            word-break: break-all;
-            font-family: monospace;
-        }
-    </style>
 </head>
 <body>
-    <div class="container mx-auto mt-4 max-w-6xl">
-        <nav class="flex mb-4">
-            <ol class="flex items-center text-sm">
-                <li class="flex items-center">
-                    <a href="../" class="link">Accueil</a>
-                    <svg class="w-4 h-4 mx-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </li>
-                <li class="flex items-center text-gray-500">
-                    Générateur de Mots de Passe
-                </li>
-            </ol>
-        </nav>
+<div class="container">
+    <nav class="breadcrumb">
+        <a href="../">Accueil</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Générateur de Mots de Passe</span>
+    </nav>
 
-        <h1 class="text-3xl text-center mb-6">Générateur de Mots de Passe</h1>
+    <header class="page-header">
+        <h1>Générateur de Mots de Passe</h1>
+    </header>
 
-        <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
-                <div class="mb-6">
-                    <h2 class="text-xl font-semibold mb-2">Sécurité du mot de passe</h2>
-                    <p class="mb-4">
-                        Ce générateur utilise l'API Web Cryptography de votre navigateur pour produire des mots de passe cryptographiquement sûrs.
-                        Contrairement à la commande OpenSSL dans un terminal Linux, les mots de passe sont générés directement dans votre navigateur sans être envoyés sur un serveur.
-                        Cela garantit que vos mots de passe ne quittent jamais votre appareil, mais la qualité de l'aléatoire dépend des capacités de votre navigateur et système.
-                    </p>
+    <!-- Section 1 : Sécurité -->
+    <section class="tool-section">
+        <div class="field-group">
+            <h2 class="field-label">Sécurité du mot de passe</h2>
+            <p>
+                Ce générateur utilise l'API Web Cryptography de votre navigateur pour produire des mots de passe cryptographiquement sûrs.
+                Contrairement à la commande OpenSSL dans un terminal Linux, les mots de passe sont générés directement dans votre navigateur sans être envoyés sur un serveur.
+                Cela garantit que vos mots de passe ne quittent jamais votre appareil, mais la qualité de l'aléatoire dépend des capacités de votre navigateur et système.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2 : Générateurs -->
+    <section class="tool-section">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <!-- Générateur Hexadécimal -->
+            <div class="field-group">
+                <h2 class="field-label">Générateur Hexadécimal</h2>
+                <p>Génère un mot de passe de 32 octets encodés en hexadécimal</p>
+                
+                <div style="margin: 16px 0;">
+                    <p style="font-weight: 500;">Détails du mot de passe Hexadécimal :</p>
+                    <ul style="padding-left: 20px; margin: 8px 0;">
+                        <li>Longueur : 64 caractères (32 octets encodés en hexadécimal)</li>
+                        <li>Caractères : Chiffres de 0 à 9 et lettres de a à f</li>
+                        <li>Avantages : Format standard pour les clés cryptographiques, facilement lisible</li>
+                        <li>Inconvénients : Moins compact que d'autres encodages</li>
+                        <li>Limites : Moins de variété de caractères que d'autres formats</li>
+                    </ul>
                 </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Générateur Hexadécimal -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-2">Générateur Hexadécimal</h2>
-                        <p class="mb-4">Génère un mot de passe de 32 octets encodés en hexadécimal</p>
-                        <div class="mb-4 p-4 bg-base-200 rounded-lg">
-                            <p class="font-semibold">Détails du mot de passe Hexadécimal :</p>
-                            <ul class="list-disc pl-5 mt-2">
-                                <li>Longueur : 64 caractères (32 octets encodés en hexadécimal)</li>
-                                <li>Caractères : Chiffres de 0 à 9 et lettres de a à f</li>
-                                <li>Avantages : Format standard pour les clés cryptographiques, facilement lisible</li>
-                                <li>Inconvénients : Moins compact que d'autres encodages</li>
-                                <li>Limites : Moins de variété de caractères que d'autres formats</li>
-                            </ul>
-                        </div>
-                        <button id="btn-hex" class="btn btn-primary">Générer un mot de passe Hexadécimal</button>
-                        <div class="mt-4" id="result-container-hex" style="display: none;">
-                            <label class="label">
-                                <span class="label-text">Mot de passe généré :</span>
-                            </label>
-                            <div class="flex">
-                                <input type="text" id="result-hex" class="input input-bordered flex-grow password-result" readonly>
-                                <button id="copy-hex" class="btn btn-outline ml-2">Copier</button>
-                            </div>
-                        </div>
+                
+                <button id="btn-hex">Générer un mot de passe Hexadécimal</button>
+                
+                <div id="result-container-hex" style="display: none; margin-top: 16px;">
+                    <label class="field-label">Mot de passe généré :</label>
+                    <div style="display: flex;">
+                        <input type="text" id="result-hex" class="password-result" readonly>
+                        <button id="copy-hex" style="margin-left: 8px;">Copier</button>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Générateur Base64 -->
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-2">Générateur Base64</h2>
-                        <p class="mb-4">Génère un mot de passe de 32 octets encodés en Base64</p>
-                        <div class="mb-4 p-4 bg-base-200 rounded-lg">
-                            <p class="font-semibold">Détails du mot de passe Base64 :</p>
-                            <ul class="list-disc pl-5 mt-2">
-                                <li>Longueur : Environ 44 caractères (32 octets encodés en Base64)</li>
-                                <li>Caractères : Lettres majuscules et minuscules, chiffres, et les symboles + et /</li>
-                                <li>Avantages : Format couramment utilisé dans les applications web et les clés API</li>
-                                <li>Inconvénients : Moins dense que l'hexadécimal pour certains usages</li>
-                                <li>Limites : Le caractère + peut poser problème dans certaines URL si non encodé</li>
-                            </ul>
-                        </div>
-                        <button id="btn-base64" class="btn btn-primary">Générer un mot de passe Base64</button>
-                        <div class="mt-4" id="result-container-base64" style="display: none;">
-                            <label class="label">
-                                <span class="label-text">Mot de passe généré :</span>
-                            </label>
-                            <div class="flex">
-                                <input type="text" id="result-base64" class="input input-bordered flex-grow password-result" readonly>
-                                <button id="copy-base64" class="btn btn-outline ml-2">Copier</button>
-                            </div>
-                        </div>
+            <!-- Générateur Base64 -->
+            <div class="field-group">
+                <h2 class="field-label">Générateur Base64</h2>
+                <p>Génère un mot de passe de 32 octets encodés en Base64</p>
+                
+                <div style="margin: 16px 0;">
+                    <p style="font-weight: 500;">Détails du mot de passe Base64 :</p>
+                    <ul style="padding-left: 20px; margin: 8px 0;">
+                        <li>Longueur : Environ 44 caractères (32 octets encodés en Base64)</li>
+                        <li>Caractères : Lettres majuscules et minuscules, chiffres, et les symboles + et /</li>
+                        <li>Avantages : Format couramment utilisé dans les applications web et les clés API</li>
+                        <li>Inconvénients : Moins dense que l'hexadécimal pour certains usages</li>
+                        <li>Limites : Le caractère + peut poser problème dans certaines URL si non encodé</li>
+                    </ul>
+                </div>
+                
+                <button id="btn-base64">Générer un mot de passe Base64</button>
+                
+                <div id="result-container-base64" style="display: none; margin-top: 16px;">
+                    <label class="field-label">Mot de passe généré :</label>
+                    <div style="display: flex;">
+                        <input type="text" id="result-base64" class="password-result" readonly>
+                        <button id="copy-base64" style="margin-left: 8px;">Copier</button>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <footer class="mt-8 pt-4 border-t text-center">
-            <p>Outil de <a href="https://tools.mourey.info" class="link">tools.mourey.info</a></p>
-        </footer>
-    </div>
+    <footer class="page-footer">
+        <p>Outil de <a href="https://tools.mourey.info">tools.mourey.info</a></p>
+    </footer>
+</div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

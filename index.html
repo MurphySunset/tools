@@ -1,79 +1,50 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="cupcake">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools - Mourey</title>
-    <link rel="stylesheet" href="global.css">
-    <style>
-        /* Styles personnalisés globaux */
-        .tool-card {
-            transition: transform 0.2s;
-        }
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .tool-icon {
-            font-size: 2.5rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outils - tools.mourey.info</title>
+  <link rel="stylesheet" href="global.css">
 </head>
 <body>
-    <div class="container mx-auto py-12">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold">Outils - <a href="https://tools.mourey.info">tools.mourey.info</a></h1>
-            <p class="text-lg">Une collection d'outils utiles pour le développement et l'analyse</p>
-        </header>
+  <div class="container">
+    <header class="page-header">
+      <h1>Outils - tools.mourey.info</h1>
+      <p class="subtitle">Une collection d'outils utiles pour le développement et l'analyse</p>
+    </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- START: Tools List -->
+    <main class="tools-section">
+      <ul class="tool-list">
+        <!-- START: Tools List -->
 
-            <!-- Background-remover -->
-            <div class="card tool-card bg-base-100 shadow-xl h-full">
-                <div class="card-body text-center">
-                    <div class="tool-icon mb-3 text-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                    </div>
-                    <h5 class="card-title text-xl font-semibold">Background-remover</h5>
-                    <p class="card-text">Outil sans description</p>
-                    <a href="tools/background-remover/" class="btn btn-primary mt-4">Accéder à l'outil</a>
+            <li>
+              <a href="tools/background-remover/" class="tool-item">
+                <span class="tool-icon">🗑️</span>
+                <div class="tool-content">
+                  <div class="tool-title">Background-remover</div>
+                  <div class="tool-description">Suppression d'arrière-plan d'images avec différents modèles IA</div>
                 </div>
-            </div>
+              </a>
+            </li>
 
 
-            <!-- Password-generator -->
-            <div class="card tool-card bg-base-100 shadow-xl h-full">
-                <div class="card-body text-center">
-                    <div class="tool-icon mb-3 text-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>
-                    </div>
-                    <h5 class="card-title text-xl font-semibold">Password-generator</h5>
-                    <p class="card-text">Outil sans description</p>
-                    <a href="tools/password-generator/" class="btn btn-primary mt-4">Accéder à l'outil</a>
+            <li>
+              <a href="tools/password-generator/" class="tool-item">
+                <span class="tool-icon">🔑</span>
+                <div class="tool-content">
+                  <div class="tool-title">Password-generator</div>
+                  <div class="tool-description">Génération de mots de passe sécurisés en Base64 et Hexadécimal</div>
                 </div>
-            </div>
+              </a>
+            </li>
         <!-- END: Tools List -->
+      </ul>
+    </main>
 
-            <!-- Carte "Ajouter un nouvel outil" -->
-            <div class="card tool-card bg-base-100 shadow-xl h-full">
-                <div class="card-body text-center">
-                    <div class="tool-icon mb-3 text-muted">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                    </div>
-                    <h5 class="card-title text-xl font-semibold">Nouvel Outil</h5>
-                    <p class="card-text">En développement...</p>
-                    <a href="#" class="btn btn-outline btn-primary mt-4 disabled pointer-events-none">Bientôt disponible</a>
-                </div>
-            </div>
-        </div>
-
-        <footer class="text-center mt-12 pt-8 border-t">
-            <p>Licence GPL v3 - <a href="https://www.gnu.org/licenses/gpl-3.0.fr.html">Code source disponible</a></p>
-            <p>Site hébergé sur GitHub Pages</p>
-        </footer>
-    </div>
+    <footer class="page-footer">
+      <p>Licence GPL v3 - <a href="https://github.com/username/repo">Code source disponible</a></p>
+      <p>Site hébergé sur GitHub Pages</p>
+    </footer>
+  </div>
 </body>
 </html>

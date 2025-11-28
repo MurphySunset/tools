@@ -7,8 +7,7 @@ Site web : https://tools.mourey.info
 ## Structure du projet
 
 - `index.html` : Page d'accueil qui liste tous les outils disponibles
-- `global.css` : Fichier CSS global généré par Tailwind CSS et DaisyUI
-- `src/input.css` : Fichier source CSS avec la configuration DaisyUI
+- `global.css` : Fichier CSS global minimaliste inspiré Bear Blog
 - `tools/` : Dossier contenant tous les outils individuels
 - `tools/template/` : Modèle standard pour créer de nouveaux outils
 - `scripts/` : Scripts utilitaires pour la gestion du projet
@@ -17,10 +16,9 @@ Site web : https://tools.mourey.info
 ## Technologies utilisées
 
 - HTML5, CSS3
-- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitaire
-- [DaisyUI](https://daisyui.com/) - Composants UI pour Tailwind CSS
+- CSS minimaliste inspiré Bear Blog (typographie soignée, design épuré)
 - JavaScript (côté client)
-- Node.js (pour les scripts de build)
+- Node.js (pour les scripts de génération)
 
 ## Installation et développement
 
@@ -29,22 +27,12 @@ Site web : https://tools.mourey.info
    git clone https://github.com/votre-compte/tools.baptiste.mourey.info.git
    ```
 
-2. Installez les dépendances :
-   ```bash
-   npm install
-   ```
-
-3. Générez le CSS :
-   ```bash
-   npm run build:css
-   ```
-
-4. Générez la page d'accueil avec la liste des outils :
+2. Générez la page d'accueil avec la liste des outils :
    ```bash
    npm run generate:index
    ```
 
-5. Pour exécuter l'ensemble du build (CSS + génération de l'index) :
+3. Pour exécuter le build complet :
    ```bash
    npm run build
    ```
@@ -76,10 +64,8 @@ L'outil utilise l'API Web Cryptography pour une génération sécurisée directe
 
 ## Scripts disponibles
 
-- `npm run build:css` : Génère le fichier CSS global à partir de src/input.css
-- `npm run watch:css` : Lance un watcher pour générer automatiquement le CSS
 - `npm run generate:index` : Génère automatiquement la liste des outils dans index.html
-- `npm run build` : Exécute le build complet (CSS + génération de l'index)
+- `npm run build` : Exécute le build complet (génération de l'index)
 
 ## Tests
 

@@ -14,8 +14,14 @@ const toolFolders = fs.readdirSync(toolsDir).filter(file => {
 const toolCards = toolFolders.map(folder => {
   // Lire le fichier README.md de l'outil s'il existe pour obtenir une description
   const readmePath = path.join(toolsDir, folder, 'README.md');
-  let description = 'Outil sans description';
+  let description = '';
   let title = folder.charAt(0).toUpperCase() + folder.slice(1);
+  
+  // Descriptions par défaut pour les outils connus
+  const defaultDescriptions = {
+    'background-remover': 'Suppression d\'arrière-plan d\'images avec différents modèles IA',
+    'password-generator': 'Génération de mots de passe sécurisés en Base64 et Hexadécimal'
+  };
   
   if (fs.existsSync(readmePath)) {
     const readmeContent = fs.readFileSync(readmePath, 'utf8');
@@ -27,33 +33,36 @@ const toolCards = toolFolders.map(folder => {
     if (descMatch) description = descMatch[1].trim();
   }
   
+  // Utiliser la description par défaut si aucune description trouvée
+  if (!description && defaultDescriptions[folder]) {
+    description = defaultDescriptions[folder];
+  }
+  
   // Générer une icône SVG basique en fonction du nom de l'outil
   const icon = getIconForTool(folder);
   
   return `
-            <!-- ${title} -->
-            <div class="card tool-card bg-base-100 shadow-xl h-full">
-                <div class="card-body text-center">
-                    <div class="tool-icon mb-3 text-primary">
-                        ${icon}
-                    </div>
-                    <h5 class="card-title text-xl font-semibold">${title}</h5>
-                    <p class="card-text">${description}</p>
-                    <a href="tools/${folder}/" class="btn btn-primary mt-4">Accéder à l'outil</a>
+            <li>
+              <a href="tools/${folder}/" class="tool-item">
+                <span class="tool-icon">${icon}</span>
+                <div class="tool-content">
+                  <div class="tool-title">${title}</div>
+                  <div class="tool-description">${description}</div>
                 </div>
-            </div>`;
+              </a>
+            </li>`;
 }).join('\n\n');
 
 // Fonction pour associer une icône SVG à un type d'outil
 function getIconForTool(folderName) {
   const iconMap = {
-    'password-generator': '<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" /></svg>',
-    'background-remover': '<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>',
+    'password-generator': '🔑',
+    'background-remover': '🗑️',
     // Ajouter d'autres mappings ici
   };
   
   // Retourner l'icône spécifique ou une icône générique
-  return iconMap[folderName] || '<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>';
+  return iconMap[folderName] || '🔧';
 }
 
 // Lire le fichier index.html existant

@@ -14,26 +14,28 @@ Actuellement, le projet contient les outils suivants :
 
 ## Guidelines de style
 
-Le projet utilisera DaisyUI comme framework CSS à la place de Bootstrap pour tous les nouveaux développements. Veuillez vous référer au fichier [docs/daisyui.md](./docs/daisyui.md) pour les détails techniques sur l'utilisation de DaisyUI dans ce projet, y compris l'installation, l'utilisation des composants et les bonnes pratiques.
+Le projet utilise un thème CSS minimaliste inspiré de Bear Blog, axé sur :
+- Typographie soignée avec polices système
+- Design épuré noir et blanc
+- Performance optimale (pas de framework CSS lourd)
+- Focus sur le contenu et la fonctionnalité
 
 ## Gestion du CSS global
 
-Le CSS global du projet est géré via un processus de build Tailwind CSS. Les fichiers de configuration se trouvent dans :
-- `src/input.css` : fichier source CSS avec la configuration DaisyUI
-- `global.css` : fichier CSS généré à la racine du projet
+Le CSS global du projet est un fichier statique minimaliste :
+- `global.css` : fichier CSS principal à la racine du projet
 
-Le thème principal utilisé est 'cupcake'. Pour modifier les styles globaux ou le thème :
-1. Modifiez le fichier `src/input.css`
-2. Générez le CSS avec la commande : `npm run build:css` (ou `npx tailwindcss -i ./src/input.css -o ./global.css --minify`)
-3. Le fichier `global.css` à la racine contiendra alors les nouveaux styles
+Le thème est inspiré de Bear Blog avec une typographie soignée. Pour modifier les styles globaux :
+1. Modifiez directement le fichier `global.css`
+2. Les changements sont immédiatement appliqués (pas de build nécessaire)
 
-Pour qu'un outil utilise ces styles globaux, incluez simplement la balise `<link rel="stylesheet" href="../../global.css">` dans l'en-tête HTML (le chemin relatif dépend de la profondeur du dossier de l'outil dans le répertoire `tools/`).
+Pour qu'un outil utilise ces styles globaux, incluez simplement la balise `<link rel="stylesheet" href="../global.css">` dans l'en-tête HTML (le chemin relatif dépend de la profondeur du dossier de l'outil dans le répertoire `tools/`).
 
 ## Ajout de nouveaux outils
 
 Pour ajouter un nouvel outil au projet :
 1. Copiez le modèle dans `tools/template/` et renommez-le avec un nom descriptif
-2. Implémentez votre outil en utilisant DaisyUI pour le style
+2. Implémentez votre outil en utilisant les classes CSS disponibles dans global.css
 3. Assurez-vous que votre outil inclut le fichier global CSS avec `<link rel="stylesheet" href="../global.css">`
 4. Assurez-vous que votre outil est accessible via une page HTML à la racine de votre dossier
 5. Exécutez `npm run generate:index` pour que votre outil apparaisse automatiquement sur la page d'accueil
@@ -46,7 +48,7 @@ Le projet inclut un système de gestion automatisé qui :
 - Utilise des templates standardisés pour une cohérence entre les outils
 - Fournit des scripts de build pour automatiser les tâches répétitives
 
-Pour exécuter le build complet (CSS + génération de l'index) :
+Pour exécuter le build complet (génération de l'index) :
 ```
 npm run build
 ```
